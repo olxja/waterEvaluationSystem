@@ -1,0 +1,33 @@
+.clearfix:before,.clearfix:after{content: " ";display: table;}
+.clearfix:after{clear: both;}
+.clearfix{zoom:1}
+#warp{width: 100%;background: url("../images/login-bg.jpg") no-repeat center center;background-size: 100% auto;}
+#warp form{width: 400px;margin: 0 auto;border: 2px solid #ccc; border-radius: 8px; background: rgba(255,255,255,0.75);}
+#warp form .title{ margin-top: 58px; margin-bottom: 58px;color: #666; font-size: 34px;text-align: center;}
+#warp form input{display: block; width: 320px;height: 40px;margin: 0 auto; color:#666; border: 2px solid #ccc;margin-bottom: 10px; border-radius: 8px;background:none;}
+#warp form input:nth-of-type(1){background: url("../images/user-input-bg.png") no-repeat 10px center;text-indent: 40px;}
+#warp form input:nth-of-type(2){background: url("../images/password-input-bg.png") no-repeat 10px center;text-indent: 40px;}
+#warp form button{ background-color: #2ea7e0; width: 320px;margin: 0 auto;padding: 0px; color: #fff; margin-bottom: 40px; font-size: 16px; cursor: pointer; height: 40px; line-height: 40px;}
+#warp form button:active{background-color: #1180aa;}
+#warp form p{width: 320px; font-size: 12px; margin: 0 auto; line-height: 16px; margin-bottom: 10px;}
+#warp form .box{ width: 320px; margin: 0 auto;}
+#warp form .box .auto-login{width: 80px; float: left;}
+#warp form .box>a{ float: right; color: #999; line-height: 20px; font-size: 12px; cursor: pointer; text-decoration: none;} 
+#warp form .box .auto-login #autoLogin{width: 16px;height: 16px; float: left;}
+#warp form .box .auto-login>span{ color: #666;font-size: 12px; line-height: 14px; display: block; width: 50px; float: right}
+/* 修改密码 */
+
+#warp form{width: 400px;margin: 0 auto;border: 2px solid #ccc; border-radius: 8px; background: rgba(255,255,255,0.75);}
+#warp form .title{ margin-top: 48px; margin-bottom: 48px;color: #666; font-size: 34px;text-align: center;}
+#warp #jvForm .xform-ul li{width: 320px; margin: 0 auto; margin-bottom: 10px;}
+#warp form input{display: block; width: 320px;height: 40px;margin: 0 auto; color:#666; border: 2px solid #ccc;margin-bottom: 10px; border-radius: 8px;background:none;}
+#warp #jvForm .xform-ul li>.form-label,#warp #jvForm .xform-ul li>.form-input{float: left;}
+#warp #jvForm .xform-ul li>.form-label{width: 70px; margin-right: 10px; font-size: 12px; color: #666; line-height: 40px;text-align: right;}
+#warp #jvForm input{width: 240px;}
+#warp #jvForm .xform-ul li>.form-input input{ background: none; text-indent: 10px; margin-bottom: 0px;}
+#warp #jvForm .xform-ul li>.form-input>div>font{display: block; font-size: 12px; height: 14px; line-height: 14px; margin-top: 6px;}
+#warp #jvForm .xform-ul li #btn{ background-color: #2ea7e0; width: 320px;margin: 0 auto;  margin-top: 20px; margin-bottom: 20px; padding: 0px; color: #fff; font-size: 16px; cursor: pointer; height: 40px; line-height: 40px;}
+#warp #jvForm .xform-ul li #btn:active{background-color: #1180aa;}
+#warp #jvForm .xform-ul .text-center #tip4{ margin-top: 10px; font-size: 12px; margin-bottom: 30px;float: left;}
+#warp #jvForm .xform-ul .text-center a{margin-top: 10px; cursor: pointer; text-decoration: none; font-size: 12px; margin-bottom: 20px; float: right;}
+/* 结束 */

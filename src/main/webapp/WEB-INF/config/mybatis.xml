@@ -1,0 +1,77 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/dbconfig.properties</value>
+                <value>/WEB-INF/solrConfig.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_username}"/>
+        <property name="password" value="${jdbc_password}"/>
+    </bean>
+    <!--配置sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>
+        <property name="typeAliasesPackage" value="sdd.bean"></property>
+    </bean>
+    <!-- 配置扫描器 -->
+    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描sdd.dao这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="com.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--由于采用的是SpringMVC、 MyBatis，故统一采用了标注来声明Service、Controller
+由于服务器启动时的加载配置文件的顺序为web.xml root-context.xml(Spring的配置文件) servlet-context.xml(SpringMVC的配置文件)，
+由于root-context.xml配置文件中Controller会先进行扫描装配，但是此时service还没有进行事务增强处理，
+得到的将是原样的Service（没有经过事务加强处理，故而没有事务处理能力），
+所以我们必须在root-context.xml中不扫描Controller-->
+    <context:component-scan base-package="com.service">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--注解式事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--注解式开发-->
+    <tx:annotation-driven transaction-manager="transactionManager"  />
+
+    <!-- resid連接池配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxActive" value="${redis.maxActive}"/>
+        <property name="maxWait" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.pass}"/>
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+
+    <!--配置solr-->
+    <bean id="enterprise_baseSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_base_url}"/>
+    </bean>
+
+    <bean id="analysisSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${analysis_url}"/>
+    </bean>
+</beans>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserMapper">
+
+    <!--通过邮箱或手机号获得User,用于登陆-->
+    <select id="loginUserByEmailOrPhone" resultMap="userRoleMap">
+        SELECT
+        u.user_id,
+        u.username,
+        u.password,
+        u.email,
+        u.phone,
+        u.department_id,
+        r.role_id,
+        r.role_name,
+        r.role_description,
+        d.department_name
+        FROM
+        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+        <where>
+            <if test="email!=null">
+                OR u.email = #{email}
+            </if>
+            <if test="phone!=null">
+                OR u.phone = #{phone}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserByCondition" resultMap="userRoleMap">
+        SELECT
+        u.user_id,
+        u.username,
+        u.password,
+        u.email,
+        u.phone,
+        u.position,
+        u.department_id,
+        r.role_id,
+        r.role_name,
+        r.role_description,
+        d.department_name
+        FROM
+        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+        <where>
+            <if test="email!=null">
+                AND u.email = #{email}
+            </if>
+            <if test="phone!=null">
+                AND u.phone = #{phone}
+            </if>
+            <if test="userId!=null">
+                AND u.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <!--查询用户总数量-->
+    <select id="getCountUser" parameterType="com.bean.User" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM
+        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+        <where>
+            <if test="username!=null">
+                OR u.username like "%"#{username}"%"
+            </if>
+            <if test="position!=null">
+                OR u.position like "%"#{position}"%"
+            </if>
+            <if test="departmentId!=null">
+                AND u.department_id = #{departmentId}
+                OR u.department_id IN (SELECT department_id FROM sys_department WHERE fid = #{departmentId})
+            </if>
+        </where>
+    </select>
+
+    <!--待定-->
+    <select id="getTotalUser" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM sys_user
+        <where>
+            <if test="username!=null">
+                OR username like "%"#{username}"%"
+            </if>
+            <if test="position!=null">
+                OR position like "%"#{position}"%"
+            </if>
+            <if test="departmentId!=null">
+                AND department_id = #{departmentId}
+                OR department_id IN (SELECT department_id FROM sys_department WHERE fid = #{departmentId})
+            </if>
+        </where>
+    </select>
+    <select id="getUserListByPage" resultType="com.bean.User">
+        SELECT
+        user_id AS userId,
+        username,
+        department_id AS departmentId,
+        position,
+        email,
+        phone
+        FROM sys_user
+        <where>
+            <if test="user.username!=null">
+                OR username like "%"#{user.username}"%"
+            </if>
+            <if test="user.position!=null">
+                OR position like "%"#{user.position}"%"
+            </if>
+            <if test="user.departmentId!=null">
+                AND department_id = #{user.departmentId}
+                OR department_id IN (SELECT department_id FROM sys_department WHERE fid = #{user.departmentId})
+            </if>
+        </where>
+        order by user_id
+        limit #{startRow},#{pageSize}
+    </select>
+    <!--待定-->
+
+    <!--查询用户集合-->
+    <select id="getUserListByCondition" parameterType="com.bean.User" resultMap="userRoleMap">
+        SELECT
+        u.user_id,
+        u.username,
+        u.department_id,
+        u.position,
+        u.email,
+        u.phone,
+        r.role_id,
+        r.role_name,
+        r.role_description,
+        d.department_name
+        FROM
+        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+        <where>
+            <if test="user.username!=null">
+                OR u.username like "%"#{user.username}"%"
+            </if>
+            <if test="user.position!=null">
+                OR u.position like "%"#{user.position}"%"
+            </if>
+            <if test="user.departmentId!=null">
+                AND u.department_id = #{user.departmentId}
+                OR u.department_id IN (SELECT department_id FROM sys_department WHERE fid = #{user.departmentId})
+            </if>
+        </where>
+        order by user_id
+        limit #{startRow},#{pageSize}
+    </select>
+
+    <resultMap id="userRoleMap" type="com.bean.User">
+        <id property="userId" column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="username" column="username" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="position" column="position" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="email" column="email" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="password" column="password" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="departmentId" column="department_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="departmentName" column="department_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <!--用户 角色 一对多映射-->
+        <collection property="roleList" javaType="java.util.List" ofType="com.bean.Role">
+            <id property="role_id" column="role_id"/>
+            <result property="role_name" column="role_name"/>
+            <result property="role_description" column="role_description"/>
+        </collection>
+    </resultMap>
+
+    <select id="findRoleByUser" parameterType="com.bean.User" resultType="com.bean.Role">
+        SELECT r.*
+        FROM sys_role AS r, sys_user_role AS ur
+        <where>
+            r.role_id = ur.role_id
+            AND
+            ur.user_id=#{userId}
+        </where>
+    </select>
+    <!--根据部门id查询用户id-->
+    <select id="selectUserIdByDepartmentId" resultType="java.lang.String">
+        SELECT user_id
+        FROM sys_user
+        WHERE department_id =#{departmentId}
+    </select>
+    <!--根据部门id查询用户-->
+    <select id="selectUserByDepartmentId" resultType="com.bean.User">
+        SELECT user_id AS userId,username,email,phone,department_id AS departmentId,position,updatetime
+        FROM sys_user
+        WHERE department_id =#{departmentId}
+    </select>
+    <!--添加用户,返回插入的id(通过对象的get方法获取-->
+    <insert id="addUser" parameterType="com.bean.User" useGeneratedKeys="true" keyProperty="userId">
+		insert into sys_user
+		(username ,password,email,phone,department_id,position,updatetime)
+		values(#{username},#{password},#{email},#{phone},#{departmentId},#{position},#{updatetime});
+	</insert>
+    <!--在中间表中插入用户 角色 对应关系-->
+    <insert id="contactUserRole">
+        insert into sys_user_role
+        (user_id,role_id)
+        values
+        <foreach collection="roleIds" item="roleId" separator=",">
+            (#{userId},#{roleId})
+        </foreach>
+    </insert>
+    <!--批量添加用户-->
+    <insert id="addUserList">
+        INSERT INTO sys_user
+        (username ,password,email,phone,department_id,position,updatetime)
+        VALUES
+        <foreach collection="users" item="user" separator=",">
+            (#{user.username},#{user.password},#{user.email},#{user.phone},#{user.departmentId},#{user.position},#{user.updatetime})
+        </foreach>
+    </insert>
+    <!--添加角色-->
+    <insert id="addRole" parameterType="java.lang.Integer">
+		insert into sys_user_role
+		(user_id ,role_id)
+		values(#{user_id},#{role_id});
+	</insert>
+    <!--删除用户的角色-->
+    <delete id="delRoleByUserId">
+        DELETE FROM sys_user_role
+        <where>
+            user_id != 1 AND user_id=#{userId}
+        </where>
+    </delete>
+
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from sys_user
+		where user_id != 1 AND user_id = #{userId}
+	</delete>
+    <!--批量删除用户-->
+    <delete id="deleteSelectUser">
+        delete from sys_user
+        where user_id != 1 AND user_id
+        in
+        <foreach collection="ids" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+    <!--修改用户-->
+    <update id="updateUser" parameterType="com.bean.User">
+        update sys_user
+        <set>
+            <if test="#{username}!=null">
+                username = #{username},
+            </if>
+            <if test="#{email}!=null">
+                email = #{email},
+            </if>
+            <if test="#{phone}!=null">
+                phone = #{phone},
+            </if>
+            <if test="#{position}!=null">
+                position = #{position},
+            </if>
+            <if test="#{departmentId}!=null">
+                department_id = #{departmentId},
+            </if>
+        </set>
+        where user_id != 1 AND user_id = #{userId}
+    </update>
+
+    <!--修改密码-->
+    <update id="updatePassword" parameterType="com.bean.User">
+		UPDATE sys_user
+		SET
+		password = #{password}
+		WHERE user_id = #{userId}
+	</update>
+
+    <!--插入登录日志-->
+    <insert id="logInfo">
+      insert into sys_login
+      (level,department_name,detail,type,login_time)
+      values (#{level},#{departmentName},#{detail},#{type},#{date});
+    </insert>
+    <!--日志总数-->
+    <select id="getCountLog" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM sys_login
+    </select>
+
+</mapper>

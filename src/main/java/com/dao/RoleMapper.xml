@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.RoleMapper">
+    <!--添加权限-->
+    <insert id="addRole" parameterType="com.bean.Role">
+        INSERT INTO sys_role
+        (role_name,role_description) VALUES (#{role_name},#{role_description})
+    </insert>
+
+    <!--更新权限-->
+    <update id="updateRole" parameterType="com.bean.Role">
+        UPDATE sys_role
+        <set>
+            <if test="#{role_id}!=null">
+                role_name = #{role_name}
+            </if>
+        </set>
+        <where>
+            role_id != 1 AND role_id = #{role_id}
+        </where>
+    </update>
+    <!--删除角色-->
+    <delete id="delRole">
+        DELETE FROM sys_role
+        WHERE role_id != 1 AND role_id =#{role_id}
+    </delete>
+    <!--角色列表-->
+    <select id="roleList" resultType="com.bean.Role">
+        select role_id,role_name,role_description from sys_role;
+    </select>
+
+    <!--根据角色查询对应权限的id-->
+    <select id="getPermissionIdByRoleId" resultType="java.lang.Integer">
+        SELECT p.permission_id
+        FROM sys_role_permission rp LEFT OUTER JOIN sys_permission p ON rp.permission_id = p.permission_id
+        <where>
+            <if test="#{role_id}!=null">
+                role_id = #{role_id}
+            </if>
+        </where>
+    </select>
+    <!--根据角色id查询对应权限-->
+    <select id="getPermissionByRoleId" resultType="com.bean.Permission">
+        SELECT p.permission_id,p.permission_name,p.permission_description
+        FROM sys_role_permission rp LEFT OUTER JOIN sys_permission p ON rp.permission_id = p.permission_id
+        <where>
+            <if test="#{role_id}!=null">
+                role_id = #{role_id}
+            </if>
+        </where>
+    </select>
+    <!--更新角色权限-->
+    <update id="updateRolePermission">
+        UPDATE sys_role
+    </update>
+    <!--根据fid查找权限-->
+    <select id="getPermissionByFid" resultType="com.bean.Permission">
+        SELECT permission_id,permission_name,permission_description,fid
+        FROM sys_permission
+        WHERE fid=#{fid}
+    </select>
+    <!--根据role_id删除角色权限对应关系-->
+    <delete id="deleteRolePermission">
+        DELETE FROM sys_role_permission
+        WHERE role_id != 1 AND role_id = #{role_id}
+    </delete>
+    <!--新增角色权限对应关系-->
+    <insert id="insertRolePermission">
+        INSERT INTO sys_role_permission
+        (role_id,permission_id) VALUES
+        <foreach collection="permission_ids" item="item" index="index" separator=",">
+            (#{role_id},#{item})
+        </foreach>
+    </insert>
+</mapper>
