@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com</groupId>
-    <artifactId>waterEvaluation</artifactId>
+    <artifactId>waterEvaluationSystem</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>water_manage Maven Webapp</name>
@@ -312,7 +312,7 @@
     </dependencies>
 
     <build>
-        <finalName>waterEvaluation</finalName>
+        <finalName>waterEvaluationSystem</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
