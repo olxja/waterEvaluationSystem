@@ -40,13 +40,6 @@ public class MyDatabaseController {
         myDatabaseService.getMyDataByCompanyId(response,company_id);
         return response;
     }
-//    public void getMyDataByCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-//        String company_id=req.getParameter("company_id");
-//        PrintWriter pw=resp.getWriter();
-//        pw.print(company_id+"this is a good company");
-//        pw.flush();
-//        pw.close();
-//    }
 
     @RequestMapping(value = "/updateCZLData")
     public String updateCZLData(MyDatabase data){
@@ -67,16 +60,14 @@ public class MyDatabaseController {
 
     @RequestMapping(value = "/insertCompanyInfo")
     @ResponseBody
-    public String insertCompanyData(@RequestBody Student approveContent,
-                                    BindingResult errors
-    ){
+    public String insertCompanyData(@RequestBody Student companyData){
 //        JSONObject object=JSONObject.fromObject(companyData);
-//        System.out.print(approveContent);
-        Student st1=new Student();
-        st1.setStudentName("lisi");
-        st1.setStudentNo("211");
-        JSONObject jsonObject = JSONObject.fromObject(st1);
-        System.out.println(jsonObject);
+        System.out.println(companyData);
+//        Student st1=new Student();
+//        st1.setStudentName("lisi");
+//        st1.setStudentNo("211");
+//        JSONObject jsonObject = JSONObject.fromObject(st1);
+//        System.out.println(jsonObject);
         String str2="hello";
         return str2;
     }
