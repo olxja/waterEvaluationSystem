@@ -5,6 +5,7 @@ import com.bean.Role;
 import com.service.RoleService;
 import com.utils.Constants;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,22 @@ public class RoleController {
 
     //角色列表
     @RequestMapping(value = "/roleList")
+    @ResponseBody
+//    public String roleList(HttpServletRequest request, Model model) {
+//        request.getSession().setAttribute("module", Constants.SYSTEM);
+//        List<Role> roles = roleService.roleList();
+//        model.addAttribute("roles", roles);
+//        return "system/roleList";
+//    }
     public String roleList(HttpServletRequest request, Model model) {
+        JSONObject jsonObject = new JSONObject();
         request.getSession().setAttribute("module", Constants.SYSTEM);
         List<Role> roles = roleService.roleList();
         model.addAttribute("roles", roles);
-        return "system/roleList";
+        jsonObject.put("roles", roles);
+        return jsonObject.toString();
     }
+
 
     @RequestMapping(value = "/getPermissionByRoleId")
     @ResponseBody
