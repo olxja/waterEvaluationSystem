@@ -38,8 +38,8 @@ public class MyDatabaseController {
     @ResponseBody
     public String getMyDataByCompanyId(@RequestParam String company_id) {
         JSONObject jsonObject=new JSONObject();
-        List<MyDatabase> data=myDatabaseService.getMyDataByCompanyId(company_id);
-        jsonObject.put("datas",data);
+        List<MyDatabase> myDatabaseList = myDatabaseService.getMyDataByCompanyId(company_id);
+        jsonObject.put("myDatabaseList",myDatabaseList);
         return jsonObject.toString();
     }
 
@@ -62,15 +62,10 @@ public class MyDatabaseController {
 
     @RequestMapping(value = "/insertCompanyInfo")
     @ResponseBody
-    public String insertCompanyData(@RequestBody Student companyData){
+    public String insertCompanyData(@RequestBody MyDatabase companyData){
 //        JSONObject object=JSONObject.fromObject(companyData);
-        System.out.println(companyData);
-//        Student st1=new Student();
-//        st1.setStudentName("lisi");
-//        st1.setStudentNo("211");
-//        JSONObject jsonObject = JSONObject.fromObject(st1);
-//        System.out.println(jsonObject);
-        String str2="hello";
+        Integer integer=myDatabaseService.insertCompanyData(companyData);
+        String str2="insert success";
         return str2;
     }
 

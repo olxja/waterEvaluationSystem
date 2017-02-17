@@ -64,14 +64,14 @@
             var main_business_income_2014=Number(document.getElementById("main_business_income_2014").value);
             var userList = new Array();
             userList.push({
-//                "company_id": "1ER",
-//                "company_name": company_name,
-//                "user_id":167,
-//                "main_business_income_2015":main_business_income_2015,
-//                "main_business_income_2014":main_business_income_2014
+                "company_id": "1ER",
+                "company_name": company_name,
+                "user_id":167,
+                "main_business_income_2015":main_business_income_2015,
+                "main_business_income_2014":main_business_income_2014
 
-                "studentName":"李四",
-                "studentNo":"111"
+//                "studentName":"李四",
+//                "studentNo":"111"
 
             });
             $.ajax({
