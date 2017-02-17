@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class AppUserController {
 
     @RequestMapping(value = "/app/test",method = RequestMethod.POST)
     @ResponseBody
-    public String test(@RequestBody User user) {
+    public String test(@Valid @RequestBody User user) {
         JSONObject jsonObject = new JSONObject();
 
         return jsonObject.toString();
