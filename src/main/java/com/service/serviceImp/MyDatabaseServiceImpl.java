@@ -1,8 +1,10 @@
 package com.service.serviceImp;
 
 import com.bean.MyDatabase;
+import com.bean.Response;
 import com.dao.MyDatabaseMapper;
 import com.service.MyDatabaseService;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +26,20 @@ public class MyDatabaseServiceImpl implements MyDatabaseService{
     }
 
     @Override
-    public List<MyDatabase> getMyDataByCompanyId(String company_id){
-        return database.getMyDataByCompanyId(company_id);
+    public void getMyDataByCompanyId(Response response, String company_id){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            List<MyDatabase> myDataList = database.getMyDataByCompanyId(company_id);
+            //可以返回多个数据
+            jsonObject.put("myDataList",myDataList);
+            //将多个数据返回
+            response.setData(jsonObject);
+        }catch (Exception e){//捕捉异常，返回异常信息
+            response.failure(e.getMessage());
+            return;
+        }
+        response.success();
+
     }
 
 

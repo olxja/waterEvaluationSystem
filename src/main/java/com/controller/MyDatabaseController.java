@@ -1,20 +1,18 @@
 package com.controller;
 
-import com.alibaba.druid.support.json.JSONParser;
-import com.bean.Mail;
 import com.bean.MyDatabase;
+import com.bean.Response;
 import com.bean.Student;
 import com.service.MyDatabaseService;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by olxja_000 on 2017/1/18.
@@ -36,11 +34,10 @@ public class MyDatabaseController {
 //    根据company_id获取MyDatabase对象
     @RequestMapping(value = "/getMyData")
     @ResponseBody
-    public String getMyDataByCompanyId(@RequestParam String company_id) {
-        JSONObject jsonObject=new JSONObject();
-        List<MyDatabase> myDatabaseList = myDatabaseService.getMyDataByCompanyId(company_id);
-        jsonObject.put("myDatabaseList",myDatabaseList);
-        return jsonObject.toString();
+    public Response getMyDataByCompanyId(@RequestParam String company_id) {
+        Response response = new Response();
+        myDatabaseService.getMyDataByCompanyId(response,company_id);
+        return response;
     }
 
     @RequestMapping(value = "/updateCZLData")
@@ -62,10 +59,15 @@ public class MyDatabaseController {
 
     @RequestMapping(value = "/insertCompanyInfo")
     @ResponseBody
-    public String insertCompanyData(@RequestBody MyDatabase companyData){
+    public String insertCompanyData(@RequestBody Student companyData){
 //        JSONObject object=JSONObject.fromObject(companyData);
-        Integer integer=myDatabaseService.insertCompanyData(companyData);
-        String str2="insert success";
+        System.out.println(companyData);
+//        Student st1=new Student();
+//        st1.setStudentName("lisi");
+//        st1.setStudentNo("211");
+//        JSONObject jsonObject = JSONObject.fromObject(st1);
+//        System.out.println(jsonObject);
+        String str2="hello";
         return str2;
     }
 
