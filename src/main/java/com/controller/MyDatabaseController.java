@@ -1,20 +1,19 @@
 package com.controller;
 
-import com.alibaba.druid.support.json.JSONParser;
-import com.bean.Mail;
 import com.bean.MyDatabase;
+import com.bean.Response;
 import com.bean.Student;
 import com.service.MyDatabaseService;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by olxja_000 on 2017/1/18.
@@ -36,11 +35,10 @@ public class MyDatabaseController {
 //    根据company_id获取MyDatabase对象
     @RequestMapping(value = "/getMyData")
     @ResponseBody
-    public String getMyDataByCompanyId(@RequestParam String company_id) {
-        JSONObject jsonObject=new JSONObject();
-        List<MyDatabase> data=myDatabaseService.getMyDataByCompanyId(company_id);
-        jsonObject.put("datas",data);
-        return jsonObject.toString();
+    public Response getMyDataByCompanyId(@RequestParam String company_id) {
+        Response response = new Response();
+        myDatabaseService.getMyDataByCompanyId(response,company_id);
+        return response;
     }
 //    public void getMyDataByCompany(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 //        String company_id=req.getParameter("company_id");

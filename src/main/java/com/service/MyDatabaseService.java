@@ -1,6 +1,7 @@
 package com.service;
 
 import com.bean.MyDatabase;
+import com.bean.Response;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface MyDatabaseService {
     List<MyDatabase>getUserCompanyId(Integer user_id);
-    List<MyDatabase> getMyDataByCompanyId(String company_id);
+    void getMyDataByCompanyId(Response response, String company_id);
 
     Integer updateCZLData(MyDatabase data);
 //根据公司id删除公司数据
