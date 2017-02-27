@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.MyDatabaseMapper">
+    
 
     <!--通过用户id查找公司名称和所属行业-->
+    <!--<resultMap id="companyName" type="com.bean.MyDatabase">-->
+        <!--<id property="company_id" column="company_id"></id>-->
+        <!--<result property="company_name" column="company_name"></result>-->
+        <!--<result property="industry_business_name" column="industry_business_name"></result>-->
+    <!--</resultMap>-->
     <select id="getUserCompanyId" parameterType="java.lang.Integer" resultType="com.bean.MyDatabase">
         SELECT
         company_id,company_name,industry_business_name
@@ -28,18 +34,87 @@
     </select>
 
     <!--更新成长力数据-->
-    <update id="updateCZLData" parameterType="com.bean.MyDatabase">
+    <update id="updateCompanyData" parameterType="com.bean.MyDatabase">
         UPDATE enterprise_mydatabase
         <set>
-            <if test='#{main_business_income_2015}!=null and #{main_business_income_2015}!=" "'>
-                main_business_income_2015 = #{main_business_income_2015},
-            </if>
-            <if test='#{main_business_income_2014}!=null and #{main_business_income_2014}!=" "'>
-                main_business_income_2014 = #{main_business_income_2014},
-            </if>
+            <if test="#{company_name}!=null"> company_name=#{company_name},</if>
+            <if test="#{show_in_three_version}!=null">show_in_three_version=#{show_in_three_version},</if>
+            <if test="#{show_in_four_version}!=null"> show_in_four_version=#{show_in_four_version},</if>
+            <if test="#{show_in_gem_version}!=null">show_in_gem_version=#{show_in_gem_version},</if>
+            <if test="#{main_business_income_2015}!=null">main_business_income_2015=#{main_business_income_2015},</if>
+            <if test="#{main_business_income_2014}!=null">main_business_income_2014=#{main_business_income_2014},</if>
+            <if test="#{main_business_income_2013}!=null">main_business_income_2013=#{main_business_income_2013},</if>
+            <if test="#{main_business_cgr_3years}!=null">main_business_cgr_3years=#{main_business_cgr_3years},</if>
+            <if test="#{net_profit_2015}!=null">net_profit_2015=#{net_profit_2015},</if>
+            <if test="#{net_profit_2014}!=null">net_profit_2014=#{net_profit_2014},</if>
+            <if test="#{net_profit_2013}!=null">net_profit_2013=#{net_profit_2013},</if>
+            <if test="#{net_profit_cgr_3years}!=null">net_profit_cgr_3years=#{net_profit_cgr_3years},</if>
+            <if test="#{total_assets_2015}!=null">total_assets_2015=#{total_assets_2015},</if>
+            <if test="#{total_assets_2014}!=null">total_assets_2014=#{total_assets_2014},</if>
+            <if test="#{total_assets_2013}!=null">total_assets_2013=#{total_assets_2013},</if>
+            <if test="#{total_assets_cgr_3years}!=null">total_assets_cgr_3years=#{total_assets_cgr_3years},</if>
+            <if test="#{capital_2015}!=null">capital_2015=#{capital_2015},</if>
+            <if test="#{capital_2014}!=null">capital_2014=#{capital_2014},</if>
+            <if test="#{capital_2013}!=null">capital_2013=#{capital_2013},</if>
+            <if test="#{capital_cgr_3years}!=null">capital_cgr_3years=#{capital_cgr_3years},</if>
+            <if test="#{main_business_profit}!=null">main_business_profit=#{main_business_profit},</if>
+            <if test="#{main_business_income}!=null">main_business_income=#{main_business_income},</if>
+            <if test="#{main_business_profit_rate}!=null">main_business_profit_rate=#{main_business_profit_rate},</if>
+            <if test="#{total_assets_yield_rate}!=null">total_assets_yield_rate=#{total_assets_yield_rate},</if>
+            <if test="#{net_asset_yield_rate}!=null">net_asset_yield_rate=#{net_asset_yield_rate},</if>
+            <if test="#{capital_stock}!=null">capital_stock=#{capital_stock},</if>
+            <if test="#{total_assets}!=null">total_assets=#{total_assets},</if>
+            <if test="#{baidu_included}!=null">baidu_included=#{baidu_included},</if>
+            <if test="#{webmaster_ranking}!=null">webmaster_ranking=#{webmaster_ranking},</if>
+            <if test="#{search_engine_index}!=null">search_engine_index=#{search_engine_index},</if>
+            <if test="#{receivables_turnover_rate}!=null">receivables_turnover_rate=#{receivables_turnover_rate},</if>
+            <if test="#{total_assets_turnover_rate}!=null">total_assets_turnover_rate=#{total_assets_turnover_rate},</if>
+            <if test="#{liquidity_ratio}!=null">liquidity_ratio=#{liquidity_ratio},</if>
+            <if test="#{shareholder_number}!=null">shareholder_number=#{shareholder_number},</if>
+            <if test="#{business_valuation}!=null">business_valuation=#{business_valuation},</if>
+            <if test="#{shareholder_equity}!=null">shareholder_equity=#{shareholder_equity},</if>
+            <if test="#{market_makers_number}!=null">market_makers_number=#{market_makers_number},</if>
+            <if test="#{investor_name}!=null">investor_name=#{investor_name},</if>
+            <if test="#{investor_number}!=null">investor_number=#{investor_number},</if>
+            <if test="#{equity_investment_number}!=null">equity_investment_number=#{equity_investment_number},</if>
+            <if test="#{equity_investment_frequency}!=null">equity_investment_frequency=#{equity_investment_frequency},</if>
+            <if test="#{bond_financing_amount}!=null">bond_financing_amount=#{bond_financing_amount},</if>
+            <if test="#{amount_of_financing}!=null">amount_of_financing=#{amount_of_financing},</if>
+            <if test="#{workers_number}!=null">workers_number=#{workers_number},</if>
+            <if test="#{graduate_student}!=null">graduate_student=#{graduate_student},</if>
+            <if test="#{undergraduate_student}!=null">undergraduate_student=#{undergraduate_student},</if>
+            <if test="#{junior_college_student}!=null">junior_college_student=#{junior_college_student},</if>
+            <if test="#{under_junior_college}!=null">under_junior_college=#{under_junior_college},</if>
+            <if test="#{graduate_student_proportion}!=null">graduate_student_proportion=#{graduate_student_proportion},</if>
+            <if test="#{undergraduate_proportion}!=null">undergraduate_proportion=#{undergraduate_proportion},</if>
+            <if test="#{junior_student_proportion}!=null">junior_student_proportion=#{junior_student_proportion},</if>
+            <if test="#{under_junior_proportion}!=null">under_junior_proportion=#{under_junior_proportion},</if>
+            <if test="#{graduate_number_index}!=null">graduate_number_index=#{graduate_number_index},</if>
+            <if test="#{undergrade_number_index}!=null">undergrade_number_index=#{undergrade_number_index},</if>
+            <if test="#{junior_number_index}!=null">junior_number_index=#{junior_number_index},</if>
+            <if test="#{under_junior_number_index}!=null">under_junior_number_index=#{under_junior_number_index},</if>
+            <if test="#{managers_change_number}!=null">managers_change_number=#{managers_change_number},</if>
+            <if test="#{company_period}!=null">company_period=#{company_period},</if>
+            <if test="#{managers_change_frequency}!=null">managers_change_frequency=#{managers_change_frequency},</if>
+            <if test="#{public_attention_index}!=null">public_attention_index=#{public_attention_index},</if>
+            <if test="#{microlog_attention_index}!=null">microlog_attention_index=#{microlog_attention_index},</if>
+            <if test="#{wechat_attention_index}!=null">wechat_attention_index=#{wechat_attention_index},</if>
+            <if test="#{invention_sum}!=null">invention_sum=#{invention_sum},</if>
+            <if test="#{computer_copyright_sum}!=null">computer_copyright_sum=#{computer_copyright_sum},</if>
+            <if test="#{certificate_sum}!=null">certificate_sum=#{certificate_sum},</if>
+            <if test="#{brand_sum}!=null">brand_sum=#{brand_sum},</if>
+            <if test="#{research_people_rate}!=null">research_people_rate=#{research_people_rate},</if>
+            <if test="#{research_put_into_rate}!=null">research_put_into_rate=#{research_put_into_rate},</if>
+            <if test="#{son_company_number}!=null">son_company_number=#{son_company_number},</if>
+            <if test="#{industry_business_name}!=null">industry_business_name=#{industry_business_name},</if>
+            <if test="#{industry_business_code}!=null">industry_business_code=#{industry_business_code},</if>
+            <if test="#{company_location}!=null">company_location=#{company_location},</if>
+            <if test="#{value_of_area}!=null">value_of_area=#{value_of_area},</if>
          </set>
         <where>
+            <if test='#{company_id}!=null'>
             company_id = #{company_id}
+            </if>
         </where>
     </update>
 
@@ -47,15 +122,166 @@
     <delete id="deleteCompanyInfo" parameterType="java.lang.String">
         DELETE FROM enterprise_mydatabase
         <where>
-            <if test='#{company_id}!=null and #{company_id}!=" " '>
                 company_id = #{company_id}
-            </if>
+
         </where>
     </delete>
     <!--添加公司数据-->
     <insert id="insertCompanyData" parameterType="com.bean.MyDatabase">
         INSERT INTO enterprise_mydatabase
-        (company_id,company_name,user_id,main_business_income_2015,main_business_income_2014)
-        VALUES (#{company_id},#{company_name},#{main_business_income_2015},#{main_business_income_2014})
+        (
+        company_id,
+        company_name,
+        user_id,
+        show_in_three_version,
+	    show_in_four_version,
+	    show_in_gem_version,
+	    main_business_income_2015,
+	    main_business_income_2014,
+	    main_business_income_2013,
+	    main_business_cgr_3years,
+	    net_profit_2015,
+	    net_profit_2014,
+	    net_profit_2013,
+	    net_profit_cgr_3years,
+	    total_assets_2015,
+	    total_assets_2014,
+	    total_assets_2013,
+	    total_assets_cgr_3years,
+	    capital_2015,
+	    capital_2014,
+	    capital_2013,
+	    capital_cgr_3years,
+	    main_business_profit,
+	    main_business_income,
+	    main_business_profit_rate,
+	    total_assets_yield_rate,
+	    net_asset_yield_rate,
+	    capital_stock,
+	    total_assets,
+	    baidu_included,
+	    webmaster_ranking,
+	    search_engine_index,
+	    receivables_turnover_rate,
+	    total_assets_turnover_rate,
+	    liquidity_ratio,
+	    shareholder_number,
+	    business_valuation,
+	    shareholder_equity,
+	    market_makers_number,
+	    investor_name,
+	    investor_number,
+	    equity_investment_number,
+	    equity_investment_frequency,
+	    bond_financing_amount,
+	    amount_of_financing,
+	    workers_number,
+	    graduate_student,
+        undergraduate_student,
+	    junior_college_student,
+	    under_junior_college,
+	    graduate_student_proportion,
+	    undergraduate_proportion,
+	    junior_student_proportion,
+	    under_junior_proportion,
+	    graduate_number_index,
+	    undergrade_number_index,
+	    junior_number_index,
+	    under_junior_number_index,
+	    managers_change_number,
+	    company_period,
+	    managers_change_frequency,
+	    public_attention_index,
+	    microlog_attention_index,
+	    wechat_attention_index,
+	    invention_sum,
+	    computer_copyright_sum,
+	    certificate_sum,
+	    brand_sum,
+	    research_people_rate,
+	    research_put_into_rate,
+	    son_company_number,
+	    industry_business_name,
+	    industry_business_code,
+	    company_location,
+	    value_of_area
+        )
+        VALUES (
+        #{company_id},
+        #{company_name},
+        #{user_id},
+        #{show_in_three_version},
+	    #{show_in_four_version},
+	    #{show_in_gem_version},
+	    #{main_business_income_2015},
+	    #{main_business_income_2014},
+	    #{main_business_income_2013},
+	    #{main_business_cgr_3years},
+	    #{net_profit_2015},
+	    #{net_profit_2014},
+	    #{net_profit_2013},
+	    #{net_profit_cgr_3years},
+	    #{total_assets_2015},
+	    #{total_assets_2014},
+	    #{total_assets_2013},
+	    #{total_assets_cgr_3years},
+	    #{capital_2015},
+	    #{capital_2014},
+	    #{capital_2013},
+	    #{capital_cgr_3years},
+	    #{main_business_profit},
+	    #{main_business_income},
+	    #{main_business_profit_rate},
+	    #{total_assets_yield_rate},
+	    #{net_asset_yield_rate},
+	    #{capital_stock},
+	    #{total_assets},
+	    #{baidu_included},
+	    #{webmaster_ranking},
+	    #{search_engine_index},
+	    #{receivables_turnover_rate},
+	    #{total_assets_turnover_rate},
+	    #{liquidity_ratio},
+	    #{shareholder_number},
+	    #{business_valuation},
+	    #{shareholder_equity},
+	    #{market_makers_number},
+	    #{investor_name},
+	    #{investor_number},
+	    #{equity_investment_number},
+	    #{equity_investment_frequency},
+	    #{bond_financing_amount},
+	    #{amount_of_financing},
+	    #{workers_number},
+	    #{graduate_student},
+        #{undergraduate_student},
+	    #{junior_college_student},
+	    #{under_junior_college},
+	    #{graduate_student_proportion},
+	    #{undergraduate_proportion},
+	    #{junior_student_proportion},
+	    #{under_junior_proportion},
+	    #{graduate_number_index},
+	    #{undergrade_number_index},
+	    #{junior_number_index},
+	    #{under_junior_number_index},
+	    #{managers_change_number},
+	    #{company_period},
+	    #{managers_change_frequency},
+	    #{public_attention_index},
+	    #{microlog_attention_index},
+	    #{wechat_attention_index},
+	    #{invention_sum},
+	    #{computer_copyright_sum},
+	    #{certificate_sum},
+	    #{brand_sum},
+	    #{research_people_rate},
+	    #{research_put_into_rate},
+	    #{son_company_number},
+	    #{industry_business_name},
+	    #{industry_business_code},
+	    #{company_location},
+	    #{value_of_area}
+        )
     </insert>
 </mapper>

@@ -15,7 +15,7 @@ public interface MyDatabaseMapper {
 
     List<MyDatabase> getMyDataByCompanyId(@Param("company_id") String company_id);
 
-    Integer updateCZLData(MyDatabase data);
+    Integer updateCompanyData(MyDatabase data);
 
 //根据公司id来删除公司数据
     Integer deleteCompanyInfo(@Param("company_id") String company_id);

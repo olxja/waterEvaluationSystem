@@ -76,13 +76,4 @@
         <location>/static/error/404.jsp</location>
     </error-page>
 
-<!--测试用servlet-->
-    <servlet>
-        <servlet-name>lxj</servlet-name>
-        <jsp-file>/WEB-INF/views/test/lxjtestpage.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-    <servlet-name>lxj</servlet-name>
-    <url-pattern>/lxjtest</url-pattern>
-    </servlet-mapping>
 </web-app>

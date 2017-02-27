@@ -9,9 +9,9 @@ public class MyDatabase implements Serializable {
   private String company_id;
   private String company_name;
   private Integer user_id;
-  private Boolean show_in_three_vension;
-  private Boolean show_in_foul_vension;
-  private Boolean show_in_gem_vension;
+  private Boolean show_in_three_version;
+  private Boolean show_in_four_version;
+  private Boolean show_in_gem_version;
   private Double main_business_income_2015;
   private Double main_business_income_2014;
   private Double main_business_income_2013;
@@ -106,28 +106,28 @@ public class MyDatabase implements Serializable {
     this.user_id = user_id;
   }
 
-  public Boolean getShow_in_three_vension() {
-    return show_in_three_vension;
+  public Boolean getShow_in_three_version() {
+    return show_in_three_version;
   }
 
-  public void setShow_in_three_vension(Boolean show_in_three_vension) {
-    this.show_in_three_vension = show_in_three_vension;
+  public void setShow_in_three_version(Boolean show_in_three_version) {
+    this.show_in_three_version = show_in_three_version;
   }
 
-  public Boolean getShow_in_foul_vension() {
-    return show_in_foul_vension;
+  public Boolean getShow_in_four_version() {
+    return show_in_four_version;
   }
 
-  public void setShow_in_foul_vension(Boolean show_in_foul_vension) {
-    this.show_in_foul_vension = show_in_foul_vension;
+  public void setShow_in_four_version(Boolean show_in_foul_version) {
+    this.show_in_four_version = show_in_foul_version;
   }
 
-  public Boolean getShow_in_gem_vension() {
-    return show_in_gem_vension;
+  public Boolean getShow_in_gem_version() {
+    return show_in_gem_version;
   }
 
-  public void setShow_in_gem_vension(Boolean show_in_gem_vension) {
-    this.show_in_gem_vension = show_in_gem_vension;
+  public void setShow_in_gem_version(Boolean show_in_gem_version) {
+    this.show_in_gem_version = show_in_gem_version;
   }
 
   public Double getMain_business_income_2015() {
