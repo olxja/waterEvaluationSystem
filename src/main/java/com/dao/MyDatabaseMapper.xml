@@ -11,7 +11,7 @@
     <!--</resultMap>-->
     <select id="getUserCompanyId" parameterType="java.lang.Integer" resultType="com.bean.MyDatabase">
         SELECT
-        company_id,company_name,industry_business_name
+        *
         FROM enterprise_mydatabase
         <where>
             <if test='#{user_id}!=null and #{user_id}!=" "'>

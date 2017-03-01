@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
-
 /**
  * Created by olxja_000 on 2017/1/18.
  */
@@ -27,14 +26,19 @@ public class MyDatabaseServiceImpl implements MyDatabaseService{
         JSONObject jsonObject1 = new JSONObject();
         try{
             List<MyDatabase> myCompanyName=database.getUserCompanyId(user_id);
-            JSONArray array=new JSONArray();
-            for(int i=0;i<myCompanyName.size();i++){
-                MyDatabase myDatabase=myCompanyName.get(i);
-                jsonObject1.put("company_id",myDatabase.getCompany_id());
-                jsonObject1.put("company_name",myDatabase.getCompany_name());
-                jsonObject1.put("industry_business_name",myDatabase.getIndustry_business_name());
-                array.add(i,jsonObject1.toString());
-            }
+            JSONArray array=JSONArray.fromObject(myCompanyName);
+//            array.fromObject(myCompanyName);
+//            for(int i=0;i<myCompanyName.size();i++){
+//                MyDatabase myDatabase=myCompanyName.get(i);
+//
+//                jsonObject1.put("company_id",myDatabase.getCompany_id());
+//                jsonObject1.put("company_name",myDatabase.getCompany_name());
+//                jsonObject1.put("industry_business_name",myDatabase.getIndustry_business_name());
+//
+//                array.add(i,jsonObject1.toString());
+//            }
+            System.out.println(array.fromObject(myCompanyName).toString());
+
             response.setData(array);
         }catch (Exception e){
             response.failure(e.getMessage());
