@@ -3,15 +3,12 @@ package com.bean;
 import java.io.Serializable;
 
 public class MyDatabase implements Serializable {
-  public MyDatabase() {
-  }
-
   private String company_id;
   private String company_name;
-  private Integer user_id;
-  private Boolean show_in_three_version;
-  private Boolean show_in_four_version;
-  private Boolean show_in_gem_version;
+  private Long user_id;
+  private Long show_in_three_version;
+  private Long show_in_four_version;
+  private Long show_in_gem_version;
   private Double main_business_income_2015;
   private Double main_business_income_2014;
   private Double main_business_income_2013;
@@ -35,12 +32,11 @@ public class MyDatabase implements Serializable {
   private Double net_asset_yield_rate;
   private Double capital_stock;
   private Double total_assets;
+  private String time_of_operation;
+  private Long workers_sum;
   private Long baidu_included;
   private Long webmaster_ranking;
   private Long search_engine_index;
-  private Double receivables_turnover_rate;
-  private Double total_assets_turnover_rate;
-  private Double liquidity_ratio;
   private Long shareholder_number;
   private Double business_valuation;
   private Double shareholder_equity;
@@ -51,7 +47,6 @@ public class MyDatabase implements Serializable {
   private Double equity_investment_frequency;
   private Double bond_financing_amount;
   private Double amount_of_financing;
-  private Long workers_number;
   private Long graduate_student;
   private Long undergraduate_student;
   private Long junior_college_student;
@@ -65,10 +60,8 @@ public class MyDatabase implements Serializable {
   private Double junior_number_index;
   private Double under_junior_number_index;
   private Long managers_change_number;
-  private String company_period;
   private Long managers_change_frequency;
   private Long public_attention_index;
-  private Long microlog_attention_index;
   private Long wechat_attention_index;
   private Long invention_sum;
   private Long computer_copyright_sum;
@@ -76,10 +69,8 @@ public class MyDatabase implements Serializable {
   private Long brand_sum;
   private Double research_people_rate;
   private Double research_put_into_rate;
-  private Long son_company_number;
-  private String industry_business_name;
-  private String industry_business_code;
-  private String company_location;
+  private Long subsidiary_company;
+  private Long heat_of_industry;
   private Double value_of_area;
 
   public String getCompany_id() {
@@ -98,35 +89,35 @@ public class MyDatabase implements Serializable {
     this.company_name = company_name;
   }
 
-  public Integer getUser_id() {
+  public Long getUser_id() {
     return user_id;
   }
 
-  public void setUser_id(Integer user_id) {
+  public void setUser_id(Long user_id) {
     this.user_id = user_id;
   }
 
-  public Boolean getShow_in_three_version() {
+  public Long getShow_in_three_version() {
     return show_in_three_version;
   }
 
-  public void setShow_in_three_version(Boolean show_in_three_version) {
+  public void setShow_in_three_version(Long show_in_three_version) {
     this.show_in_three_version = show_in_three_version;
   }
 
-  public Boolean getShow_in_four_version() {
+  public Long getShow_in_four_version() {
     return show_in_four_version;
   }
 
-  public void setShow_in_four_version(Boolean show_in_foul_version) {
-    this.show_in_four_version = show_in_foul_version;
+  public void setShow_in_four_version(Long show_in_four_version) {
+    this.show_in_four_version = show_in_four_version;
   }
 
-  public Boolean getShow_in_gem_version() {
+  public Long getShow_in_gem_version() {
     return show_in_gem_version;
   }
 
-  public void setShow_in_gem_version(Boolean show_in_gem_version) {
+  public void setShow_in_gem_version(Long show_in_gem_version) {
     this.show_in_gem_version = show_in_gem_version;
   }
 
@@ -314,6 +305,22 @@ public class MyDatabase implements Serializable {
     this.total_assets = total_assets;
   }
 
+  public String getTime_of_operation() {
+    return time_of_operation;
+  }
+
+  public void setTime_of_operation(String time_of_operation) {
+    this.time_of_operation = time_of_operation;
+  }
+
+  public Long getWorkers_sum() {
+    return workers_sum;
+  }
+
+  public void setWorkers_sum(Long workers_sum) {
+    this.workers_sum = workers_sum;
+  }
+
   public Long getBaidu_included() {
     return baidu_included;
   }
@@ -336,30 +343,6 @@ public class MyDatabase implements Serializable {
 
   public void setSearch_engine_index(Long search_engine_index) {
     this.search_engine_index = search_engine_index;
-  }
-
-  public Double getReceivables_turnover_rate() {
-    return receivables_turnover_rate;
-  }
-
-  public void setReceivables_turnover_rate(Double receivables_turnover_rate) {
-    this.receivables_turnover_rate = receivables_turnover_rate;
-  }
-
-  public Double getTotal_assets_turnover_rate() {
-    return total_assets_turnover_rate;
-  }
-
-  public void setTotal_assets_turnover_rate(Double total_assets_turnover_rate) {
-    this.total_assets_turnover_rate = total_assets_turnover_rate;
-  }
-
-  public Double getLiquidity_ratio() {
-    return liquidity_ratio;
-  }
-
-  public void setLiquidity_ratio(Double liquidity_ratio) {
-    this.liquidity_ratio = liquidity_ratio;
   }
 
   public Long getShareholder_number() {
@@ -440,14 +423,6 @@ public class MyDatabase implements Serializable {
 
   public void setAmount_of_financing(Double amount_of_financing) {
     this.amount_of_financing = amount_of_financing;
-  }
-
-  public Long getWorkers_number() {
-    return workers_number;
-  }
-
-  public void setWorkers_number(Long workers_number) {
-    this.workers_number = workers_number;
   }
 
   public Long getGraduate_student() {
@@ -554,14 +529,6 @@ public class MyDatabase implements Serializable {
     this.managers_change_number = managers_change_number;
   }
 
-  public String getCompany_period() {
-    return company_period;
-  }
-
-  public void setCompany_period(String company_period) {
-    this.company_period = company_period;
-  }
-
   public Long getManagers_change_frequency() {
     return managers_change_frequency;
   }
@@ -576,14 +543,6 @@ public class MyDatabase implements Serializable {
 
   public void setPublic_attention_index(Long public_attention_index) {
     this.public_attention_index = public_attention_index;
-  }
-
-  public Long getMicrolog_attention_index() {
-    return microlog_attention_index;
-  }
-
-  public void setMicrolog_attention_index(Long microlog_attention_index) {
-    this.microlog_attention_index = microlog_attention_index;
   }
 
   public Long getWechat_attention_index() {
@@ -642,36 +601,20 @@ public class MyDatabase implements Serializable {
     this.research_put_into_rate = research_put_into_rate;
   }
 
-  public Long getSon_company_number() {
-    return son_company_number;
+  public Long getSubsidiary_company() {
+    return subsidiary_company;
   }
 
-  public void setSon_company_number(Long son_company_number) {
-    this.son_company_number = son_company_number;
+  public void setSubsidiary_company(Long subsidiary_company) {
+    this.subsidiary_company = subsidiary_company;
   }
 
-  public String getIndustry_business_name() {
-    return industry_business_name;
+  public Long getHeat_of_industry() {
+    return heat_of_industry;
   }
 
-  public void setIndustry_business_name(String industry_business_name) {
-    this.industry_business_name = industry_business_name;
-  }
-
-  public String getIndustry_business_code() {
-    return industry_business_code;
-  }
-
-  public void setIndustry_business_code(String industry_business_code) {
-    this.industry_business_code = industry_business_code;
-  }
-
-  public String getCompany_location() {
-    return company_location;
-  }
-
-  public void setCompany_location(String company_location) {
-    this.company_location = company_location;
+  public void setHeat_of_industry(Long heat_of_industry) {
+    this.heat_of_industry = heat_of_industry;
   }
 
   public Double getValue_of_area() {

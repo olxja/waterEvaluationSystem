@@ -4,6 +4,7 @@ import com.bean.MyDatabase;
 import com.bean.Response;
 import com.bean.Student;
 import com.service.MyDatabaseService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,7 @@ public class MyDatabaseController {
     @RequestMapping(value = "/insertCompanyList")
     @ResponseBody
     public Response insertCompanyData(@RequestBody MyDatabase companyData){
+        JSONArray jsonArray=JSONArray.fromObject(companyData);
        Response response=new Response();
         myDatabaseService.insertCompanyData( response,companyData);
         return response;

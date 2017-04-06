@@ -67,10 +67,125 @@
     </bean>
 
     <!--配置solr-->
+    <!--企业基本信息-->
     <bean id="enterprise_baseSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
         <constructor-arg index="0" value="${enterprise_base_url}"/>
     </bean>
-
+    <!--企业评分-->
+    <bean id="enterprise_score" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_score}"/>
+    </bean>
+    <!--详情记录个数-->
+    <bean id="company_number_appSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+    <constructor-arg index="0" value="${company_number_app_url}"/>
+    </bean>
+    <!--股东-->
+    <bean id="enterprise_shareholder_personSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_shareholder_person_url}"/>
+    </bean>
+    <!--主要人员-->
+    <bean id="enterprise_key_personSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_key_person_url}"/>
+    </bean>
+    <!--变更信息-->
+    <bean id="enterprise_change_recordSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_change_record_url}"/>
+    </bean>
+    <!--企业失信信息-->
+    <bean id="enterprise_unpromise" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_unpromise_person_url}"/>
+    </bean>
+    <!--企业法院公告-->
+    <bean id="enterprise_court_announcementSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_court_announcement_url}"/>
+    </bean>
+    <!--企业裁判文书-->
+    <bean id="enterprise_adjudicative_documentSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_adjudicative_document_url}"/>
+    </bean>
+    <!--商标-->
+    <bean id="enterprise_brandSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_brand_url}"/>
+    </bean>
+    <!--专利-->
+    <bean id="enterprise_patentSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_patent_url}"/>
+    </bean>
+    <!--证书-->
+    <bean id="enterprise_certificateSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_certificate_url}"/>
+    </bean>
+    <!--作品著作权-->
+    <bean id="enterprise_copyrightSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_copyright_url}"/>
+    </bean>
+    <!--软件著作权-->
+    <bean id="enterprise_software_copyrightSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_software_copyright_url}"/>
+    </bean>
+    <bean id="enterprise_annual_report_baseSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_annual_report_base_url}"/>
+    </bean>
+    <!--年报股东及出资信息-->
+    <bean id="enterprise_annual_report_shareholderSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_annual_report_shareholder_url}"/>
+    </bean>
+    <!--年报对外投资信息-->
+    <bean id="enterprise_annual_report_foreign_investmentSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_annual_report_foreign_investment_url}"/>
+    </bean>
+    <!--年报变更记录-->
+    <bean id="enterprise_annual_report_change_recordSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_annual_report_change_record_url}"/>
+    </bean>
+    <!--年报股权变更信息-->
+    <bean id="enterprise_annual_report_share_changeSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_annual_report_share_change_url}"/>
+    </bean>
+    <!--对外投资信息-->
+    <bean id="enterprise_foreign_investmentSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_foreign_investment_url}"/>
+    </bean>
+    <!--分支机构信息-->
+    <bean id="enterprise_affiliateSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+    <constructor-arg index="0" value="${enterprise_affiliate_url}"/>
+    </bean>
+    <!--创业公司媒体报道-->
+    <bean id="startup_newsSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${startup_news_url}"/>
+    </bean>
+    <!--企业资质：雏鹰计划-->
+    <bean id="enterprise_aptitudeSolr1" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude1}"/>
+    </bean>
+    <!--企业资质：金种子-->
+    <bean id="enterprise_aptitudeSolr2" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude2}"/>
+    </bean>
+    <!--企业资质：高新技术成果转化项目-->
+    <bean id="enterprise_aptitudeSolr3" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude3}"/>
+    </bean>
+    <!--企业资质：科技创新资金-->
+    <bean id="enterprise_aptitudeSolr4" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude4}"/>
+    </bean>
+    <!--企业资质：国高新-->
+    <bean id="enterprise_aptitudeSolr5" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude5}"/>
+    </bean>
+    <!--企业资质：科技服务业促进专项-->
+    <bean id="enterprise_aptitudeSolr6" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude6}"/>
+    </bean>
+    <!--企业资质：中关村高新-->
+    <bean id="enterprise_aptitudeSolr7" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_aptitude7}"/>
+    </bean>
+    <!--企业新闻-->
+    <bean id="enterprise_newsSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="${enterprise_news}"/>
+    </bean>
     <bean id="analysisSolr" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
         <constructor-arg index="0" value="${analysis_url}"/>
     </bean>
