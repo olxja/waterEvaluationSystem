@@ -89,12 +89,15 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public void getJson(Response response, Model model) {
+    public void getModelJson(Response response, Model model) {
         JSONObject jsonObject = new JSONObject();
         try {
-            List<Model> r = modelMapper.getJson(model);
+            String r = modelMapper.getModelJson(model);
+//            r = r.replace("\r","");
+//            r = r.replace(" ","");
+//            r = r.replace("\n","");
             //可以返回多个数据
-            jsonObject.put("getJson",r);
+            jsonObject.put("getModelJson",r);
             //将多个数据返回
             response.setData(jsonObject);
         }catch (Exception e){//捕捉异常，返回异常信息

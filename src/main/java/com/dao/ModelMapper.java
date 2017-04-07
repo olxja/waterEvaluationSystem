@@ -20,7 +20,7 @@ public interface ModelMapper {
 
     Integer addModel(Model model);
 
-    List<Model> getJson(Model model);
+    String getModelJson(Model model);
 
     List<Model> getTemp(Model model);
 

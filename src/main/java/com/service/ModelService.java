@@ -14,7 +14,7 @@ public interface ModelService {
 
     void addModel(Response response,Model model);
 
-    void getJson(Response response,Model model);
+    void getModelJson(Response response,Model model);
 
     void getTemp(Response response,Model model);
 

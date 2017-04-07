@@ -56,11 +56,11 @@ public class ModelController {
         return response;
     }
     //得到大json表内容
-    @RequestMapping(value = "/getJson")
+    @RequestMapping(value = "/getModelJson")
     @ResponseBody
-    public Response getJson(Model model) {          //
+    public Response getModelJson(Model model) {          //
         Response response = new Response();
-        ModelService.getJson(response,model);
+        ModelService.getModelJson(response,model);
         return response;
     }
     //得到临时json表内容
