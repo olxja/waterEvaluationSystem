@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import java.util.Date;
 
-
+//总之返回一个login或报错
 
 @Controller
 public class AccessController {
@@ -31,12 +31,17 @@ public class AccessController {
     public String index(){
         return "redirect:/login";
     }
-
+//    //test start
+//    @RequestMapping(value = "+++")
+//    public String index(){
+//        return "login";
+//    }
+//    //test end
     @RequestMapping("/login")
     public String login() {
         /*自动登陆*/
         Subject subject = SecurityUtils.getSubject();
-        if (!subject.isAuthenticated() && subject.isRemembered()) {
+        if (!subject.isAuthenticated() && subject.isRemembered()) {   //如果没有认证且已记入
             Object principal = subject.getPrincipal();
             if (null != principal) {
                 User user = userService.loginUserByEmailOrPhone(String.valueOf(principal));
@@ -112,11 +117,11 @@ public class AccessController {
             msg = "您没有得到相应的授权！";
             model.addAttribute("message", msg);
             log.error(e.getMessage());
-        }catch (AuthenticationException  e){
+        } catch (AuthenticationException  e){
             msg = "帐号密码不匹配！";
             model.addAttribute("message", msg);
             log.error(e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e){
             msg = "帐号或密码不存在！";
             model.addAttribute("message", msg);
             log.error(e.getMessage());

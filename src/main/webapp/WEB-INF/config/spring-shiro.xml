@@ -59,7 +59,7 @@
                 <!--退出-->
                 /logout=logout
                 <!--剩下的全拦截-->
-                /**=authc
+                <!--/**=authc-->
             </value>
         </property>
     </bean>

@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.UserMapper">
+    <!--管理用户表-->
 
-    <!--通过邮箱或手机号获得User,用于登陆-->
-    <select id="loginUserByEmailOrPhone" resultMap="userRoleMap">
-        SELECT
-        u.user_id,
-        u.username,
-        u.password,
-        u.email,
-        u.phone,
-        u.department_id,
-        r.role_id,
-        r.role_name,
-        r.role_description,
-        d.department_name
-        FROM
-        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
-        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
-        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
-        <where>
-            <if test="email!=null">
-                OR u.email = #{email}
-            </if>
-            <if test="phone!=null">
-                OR u.phone = #{phone}
-            </if>
-        </where>
-    </select>
+        <select id="loginUserByEmailOrPhone" resultMap="userRoleMap">
+            SELECT
+            u.user_id,
+            u.username,
+            u.password,
+            u.email,
+            u.phone,
+            u.department_id,
+            r.role_id,
+            r.role_name,
+            r.role_description,
+            d.department_name
+            FROM
+            sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+            LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+            LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+            <where>
+                <if test="email!=null">
+                    OR u.email = #{email}
+                </if>
+                <if test="phone!=null">
+                    OR u.phone = #{phone}
+                </if>
+            </where>
+        </select>
 
-    <select id="getUserByCondition" resultMap="userRoleMap">
-        SELECT
-        u.user_id,
-        u.username,
-        u.password,
-        u.email,
-        u.phone,
-        u.position,
-        u.department_id,
-        r.role_id,
-        r.role_name,
-        r.role_description,
-        d.department_name
-        FROM
-        sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
-        LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
-        LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
-        <where>
-            <if test="email!=null">
-                AND u.email = #{email}
-            </if>
-            <if test="phone!=null">
-                AND u.phone = #{phone}
-            </if>
-            <if test="userId!=null">
-                AND u.user_id = #{userId}
-            </if>
-        </where>
-    </select>
+        <select id="getUserByCondition" resultMap="userRoleMap">
+            SELECT
+            u.user_id,
+            u.username,
+            u.password,
+            u.email,
+            u.phone,
+            u.position,
+            u.department_id,
+            r.role_id,
+            r.role_name,
+            r.role_description,
+            d.department_name
+            FROM
+            sys_user u LEFT OUTER JOIN sys_user_role ur ON u.user_id = ur.user_id
+            LEFT OUTER JOIN sys_role r ON ur.role_id = r.role_id
+            LEFT OUTER JOIN sys_department d ON u.department_id = d.department_id
+            <where>
+                <if test="email!=null">
+                    AND u.email = #{email}
+                </if>
+                <if test="phone!=null">
+                    AND u.phone = #{phone}
+                </if>
+                <if test="userId!=null">
+                    AND u.user_id = #{userId}
+                </if>
+            </where>
+        </select>
 
-    <!--查询用户总数量-->
+        <!--查询用户总数量-->
     <select id="getCountUser" parameterType="com.bean.User" resultType="java.lang.Integer">
         SELECT count(*)
         FROM

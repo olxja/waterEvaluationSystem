@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by lkhwjr on 2016/8/1.
  */
-public class User implements Serializable {
+public class User  implements Serializable {
     private Integer userId;
     private String username;
     private String password;

@@ -61,9 +61,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Integer delRole(String role_id) {
+        System.out.print("123456789");
         Integer r = roleMapper.delRole(role_id);
-        Integer rp = roleMapper.deleteRolePermission(role_id);
-        return r * rp;
+//        Integer rp = roleMapper.deleteRolePermission(role_id);
+        System.out.print("123456789");
+        return r ;
     }
 
     @Override

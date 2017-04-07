@@ -26,7 +26,7 @@
     </delete>
     <!--角色列表-->
     <select id="roleList" resultType="com.bean.Role">
-        select role_id,role_name,role_description from sys_role;
+        select role_id,role_name,role_description from sys_role;  <!--分号要不要-->
     </select>
 
     <!--根据角色查询对应权限的id-->

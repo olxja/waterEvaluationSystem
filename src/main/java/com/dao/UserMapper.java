@@ -39,7 +39,6 @@ public interface UserMapper {
 
     int getCountLog();
 
-
     Integer contactUserRole(@Param("userId") Integer userId,@Param("roleIds") String[] roleIds);
 
     Integer delRoleByUserId(@Param("userId") Integer userId);

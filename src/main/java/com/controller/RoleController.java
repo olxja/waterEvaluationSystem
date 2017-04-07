@@ -5,6 +5,7 @@ import com.bean.Role;
 import com.service.RoleService;
 import com.utils.Constants;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,14 @@ public class RoleController {
 
     //角色列表
     @RequestMapping(value = "/roleList")
+    @ResponseBody
     public String roleList(HttpServletRequest request, Model model) {
-        request.getSession().setAttribute("module", Constants.SYSTEM);
+        JSONObject jsonObject = new JSONObject();
+        request.getSession().setAttribute("module", Constants.SYSTEM);   //session对象
         List<Role> roles = roleService.roleList();
         model.addAttribute("roles", roles);
-        return "system/roleList";
+        jsonObject.put("roles", roles);                           //给对象添加元素
+        return jsonObject.toString();
     }
 
     @RequestMapping(value = "/getPermissionByRoleId")
@@ -72,7 +76,7 @@ public class RoleController {
     @RequestMapping(value = "/addRole")
     public String addRole(Role role) {
         Integer integer = roleService.addRole(role);
-        return "redirect:/roleList";
+        return "roleList";
     }
 
     @RequestMapping(value = "/updateRole")
@@ -83,9 +87,8 @@ public class RoleController {
 
     @RequestMapping(value = "/delRole")
     public String delRole(String role_id) {
-        Integer integer = roleService.delRole(role_id);
-        return "redirect:/roleList";
+        Integer integer = roleService.delRole("2");
+        return "redirect:/login";
     }
-
 
 }

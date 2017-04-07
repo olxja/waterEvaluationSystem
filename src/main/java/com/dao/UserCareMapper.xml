@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserCareMapper">
+    <!--根据用户id查询用户关心的企业&ndash;&gt;&lt;!&ndash;bean等现在没有生成-->
+    <!--<select id="selectUserCareByUserId" parameterType="com.bean.UserCare" resultType="UserCareMap">-->
+        <!--SELECT-->
+        <!--em.company_name-->
+        <!--em.industry_business_name-->
+        <!--&lt;!&ndash;一级指标暂无,留待填写&ndash;&gt;-->
+        <!--FROM-->
+        <!--sys_user u LEFT OUTER JOIN sys_user_care uc ON u.user_id = uc.user_id-->
+        <!--LEFT OUTER JOIN enterprise_mydatabase em ON uc.company_id = em.id-->
+        <!--WHERE company_group_name = #{company_group_name}-->
+        <!--order by company_id-->
+        <!--limit #{startRow},#{pageSize}-->
+    <!--</select>-->
+    <!--用户关心企业列表（根据user_id和默认分组号查询）-->
+    <select id="userCareList" resultType="com.bean.UserCare">
+        SELECT c.group_id,c.company_name,c.group_name,e.industry_business_name
+        FROM  enterprise_mydatabase e LEFT OUTER JOIN  sys_user_care c
+        ON e.company_name = c.company_name
+        <!--<where>-->
+            <!--<if test="#{user_id}!=null">-->
+                <!--user_id = #{user_id}-->
+            <!--</if>-->
+        <!--</where>-->
+        WHERE c.user_id = #{user_id} AND c.group_name = #{group_name}
+    </select>
+    <!--<select id="userCareList" resultType="com.bean.UserCare">-->
+        <!--select group_id,user_id,company_name,group_name-->
+        <!--from sys_user_care-->
+        <!--WHERE-->
+         <!--user_id = #{user_id} AND group_id = 2-->
+    <!--</select>-->
+    <!--添加用户关心企业(根据user_id和company_name添加)-->
+    <insert id="addUserCare" parameterType="com.bean.UserCare">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from sys_user_care where company_name = #{company_name} AND user_id = #{user_id}
+        </selectKey>
+        <if test="count == 0">
+            INSERT INTO sys_user_care
+            (group_id,user_id,company_name,group_name)
+            VALUE (#{group_id},#{user_id},#{company_name},#{group_name})
+        </if>
+        <if test="count > 0">   <!--如果已关心，不进行任何操作,加到哪一个分组是个问题-->
+            UPDATE sys_user_care SET
+            user_id = #{user_id}
+            WHERE company_name = #{company_name} AND user_id = #{user_id}
+        </if>
+    </insert>
+    <!--更新用户关心企业-->
+    <update id="updateUserCare" parameterType="com.bean.UserCare">
+        UPDATE sys_role
+    </update>
+    <!--删除用户关心的企业（根据user_id和company_name删除）-->
+    <delete id="deleteUserCare">
+        DELETE FROM sys_user_care
+        WHERE  user_id = #{user_id} AND company_name = #{company_name}
+    </delete>
+    <!--选择分组（根据user_id查询）-->
+    <select id="choseGroup" resultType="com.bean.UserCare">
+        select group_name
+        from sys_user_care
+        WHERE user_id = #{user_id}
+    </select>
+    <!--添加分组，公司名留空-->
+    <insert id="addGroup" parameterType="com.bean.UserCare" >
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+        select count(*) from sys_user_care where group_name = #{group_name} AND user_id = #{user_id}
+        </selectKey>
+        <if test="count == 0">
+            INSERT INTO sys_user_care
+            (user_id,group_name)
+            VALUE (#{user_id},#{group_name})
+        </if>
+        <if test="count > 0">   <!--如果分组已存在，不进行任何操作-->
+            UPDATE sys_user_care SET
+            group_name = #{group_name}
+            WHERE group_name = #{group_name} AND user_id = #{user_id}
+        </if>
+    </insert>
+    <!--修改分组,需要传原来的分组名称和修改后的分组名称-->
+    <insert id="updateGroup" parameterType="com.bean.UserCare" >
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from sys_user_care where group_name = #{group_name1} AND user_id = #{user_id}
+        </selectKey>
+        <if test="count == 0">
+            INSERT INTO sys_user_care
+            (user_id,group_name)
+            VALUE (#{user_id},#{group_name1})
+        </if>
+        <if test="count > 0">   <!--如果存在该分组名，修改它-->
+            UPDATE sys_user_care SET
+            group_name = #{group_name2}
+            WHERE group_name = #{group_name1} AND user_id = #{user_id}
+        </if>
+    </insert>
+    <!--删除分组（根据user_id和group_name删除）-->
+    <delete id="deleteGroup">
+        DELETE FROM sys_user_care
+        WHERE  user_id = #{user_id} AND group_name = #{group_name}
+    </delete>
+</mapper>
