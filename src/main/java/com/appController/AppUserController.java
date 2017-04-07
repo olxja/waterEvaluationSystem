@@ -5,10 +5,13 @@ import com.service.UserService;
 import com.utils.Constants;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -19,6 +22,14 @@ import java.util.List;
 public class AppUserController {
     @Resource
     private UserService userService;
+
+    @RequestMapping(value = "/app/test",method = RequestMethod.POST)
+    @ResponseBody
+    public String test(@Valid @RequestBody User user) {
+        JSONObject jsonObject = new JSONObject();
+
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "/app/userList")
     @ResponseBody

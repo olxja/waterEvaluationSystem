@@ -27,14 +27,21 @@ public class RoleController {
     //角色列表
     @RequestMapping(value = "/roleList")
     @ResponseBody
+//    public String roleList(HttpServletRequest request, Model model) {
+//        request.getSession().setAttribute("module", Constants.SYSTEM);
+//        List<Role> roles = roleService.roleList();
+//        model.addAttribute("roles", roles);
+//        return "system/roleList";
+//    }
     public String roleList(HttpServletRequest request, Model model) {
         JSONObject jsonObject = new JSONObject();
-        request.getSession().setAttribute("module", Constants.SYSTEM);   //session对象
+        request.getSession().setAttribute("module", Constants.SYSTEM);
         List<Role> roles = roleService.roleList();
         model.addAttribute("roles", roles);
-        jsonObject.put("roles", roles);                           //给对象添加元素
+        jsonObject.put("roles", roles);
         return jsonObject.toString();
     }
+
 
     @RequestMapping(value = "/getPermissionByRoleId")
     @ResponseBody
@@ -76,7 +83,7 @@ public class RoleController {
     @RequestMapping(value = "/addRole")
     public String addRole(Role role) {
         Integer integer = roleService.addRole(role);
-        return "roleList";
+        return "redirect:/roleList";
     }
 
     @RequestMapping(value = "/updateRole")
@@ -87,8 +94,9 @@ public class RoleController {
 
     @RequestMapping(value = "/delRole")
     public String delRole(String role_id) {
-        Integer integer = roleService.delRole("2");
-        return "redirect:/login";
+        Integer integer = roleService.delRole(role_id);
+        return "redirect:/roleList";
     }
+
 
 }

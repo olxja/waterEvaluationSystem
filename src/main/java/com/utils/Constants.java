@@ -5,6 +5,9 @@ public interface Constants {
     Integer OK = 0;
     Integer ERROR = 1;
     Integer NULL = 2;
+    //暂无
+    String noData = "暂无";
+
 
     //未发布
     String offline = "0";

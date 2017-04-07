@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.EnterScoreMapper">
+    <insert id="insertEnterScore" parameterType="com.bean.Enterprise_score">
+        INSERT INTO enterprise_score
+        (
+        company_id,
+        model_id,
+        growth_force,
+        competitive_force,
+        financing_force,
+        teamcomposition_force,
+        publicvoice_force,
+        innovatiove_force,
+        external_force,
+        sumscore
+        )
+        VALUE
+        (
+        #{company_id},
+        #{model_id},
+        #{growth_force},
+        #{competitive_force},
+        #{financing_force},
+        #{teamcomposition_force},
+        #{publicvoice_force},
+        #{innovatiove_force},
+        #{external_force},
+        #{sumscore}
+        )
+    </insert>
+</mapper>

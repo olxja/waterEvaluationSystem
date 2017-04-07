@@ -11,4 +11,9 @@
         <!-- 设置编码格式 -->
         <property name="fileEncoding" value="UTF-8"></property>
     </bean>
+    <bean id="allIndustryMap" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="location" value="/WEB-INF/dictionary/allIndustry.properties"/>
+        <!-- 设置编码格式 -->
+        <property name="fileEncoding" value="UTF-8"></property>
+    </bean>
 </beans>
